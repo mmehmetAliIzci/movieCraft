@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { ScrollView, StyleSheet, TextInput, View } from "react-native";
+import { Button, ScrollView, StyleSheet, TextInput } from "react-native";
 
 export const Login = observer(() => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -8,15 +8,24 @@ export const Login = observer(() => {
     <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps={"handled"}>
       <TextInput
         style={style.input}
+        placeholder={"john@jansen.com"}
         onChangeText={text => {
           setCredentials({ ...credentials, email: text });
         }}
       />
       <TextInput
         style={style.input}
+        secureTextEntry={true}
+        placeholder={"********"}
         onChangeText={text =>
           setCredentials({ ...credentials, password: text })
         }
+      />
+      <Button
+        onPress={() => {
+          console.warn("log in");
+        }}
+        title={"Login"}
       />
     </ScrollView>
   );
