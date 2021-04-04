@@ -1,8 +1,9 @@
-import { action, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { RootStore } from "./RootStore";
+import { login } from "../services/ProfileService";
 
 export interface Profile {
-  email: string;
+  username: string;
   name: string;
 }
 
@@ -13,15 +14,23 @@ export class ProfileStore {
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     this.profile = undefined;
+    makeObservable(this);
   }
 
   @action setProfile(profile: Profile) {
     this.profile = profile;
   }
 
-  @action login() {
-    // http call to the be for getting token
-    this.profile = undefined;
+  @action async login(username: string, password: string) {
+    try {
+      this.rootStore.loadingStore.startLoading();
+      const profile = await login(username, password);
+      this.setProfile({ username, name: profile?.name });
+    } catch (e) {
+      console.warn("Something went wrong during login");
+    } finally {
+      setTimeout(() => this.rootStore.loadingStore.stopLoading(), 1000);
+    }
   }
 
   @action logout() {
