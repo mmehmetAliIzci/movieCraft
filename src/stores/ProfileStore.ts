@@ -1,6 +1,7 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable, runInAction } from "mobx";
 import { RootStore } from "./RootStore";
-import { login } from "../services/ProfileService";
+import { fetchCurrentProfile, login } from "../services/ProfileService";
+import * as Keychain from "react-native-keychain";
 
 export interface Profile {
   username: string;
@@ -21,19 +22,38 @@ export class ProfileStore {
     this.profile = profile;
   }
 
-  @action async login(username: string, password: string) {
+  @action async fetchProfile() {
     try {
       this.rootStore.loadingStore.startLoading();
-      const profile = await login(username, password);
-      this.setProfile({ username, name: profile?.name });
+      const profile = await fetchCurrentProfile();
+      this.setProfile(profile);
     } catch (e) {
-      console.warn("Something went wrong during login");
+      console.warn(e.error);
     } finally {
+      // Syntetic timeout to imitate fetch delay
       setTimeout(() => this.rootStore.loadingStore.stopLoading(), 1000);
     }
   }
 
-  @action logout() {
-    this.profile = undefined;
+  @action async login(username: string, password: string) {
+    try {
+      this.rootStore.loadingStore.startLoading();
+
+      const profile = await login(username, password);
+      this.setProfile({ username, name: profile.name });
+      await Keychain.setGenericPassword(username, profile.token);
+    } catch (e) {
+      console.warn(e.error);
+    } finally {
+      // Syntetic timeout to imitate fetch delay
+      setTimeout(() => this.rootStore.loadingStore.stopLoading(), 1000);
+    }
+  }
+
+  @action async logout() {
+    await Keychain.resetGenericPassword();
+    runInAction(() => {
+      this.profile = undefined;
+    });
   }
 }
