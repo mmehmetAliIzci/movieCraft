@@ -26,7 +26,6 @@ export class MovieStore {
       if (results.Response === "True" && results.Search.length > 0) {
         runInAction(() => {
           this.movies = [...this.movies, ...results.Search];
-          console.warn(toJS(this.movies));
         });
       }
     } catch (e) {
