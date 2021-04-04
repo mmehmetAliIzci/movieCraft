@@ -10,11 +10,10 @@ export interface Profile {
 
 export class ProfileStore {
   private rootStore: RootStore;
-  @observable profile: Profile | undefined;
+  @observable profile: Profile | undefined = undefined;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
-    this.profile = undefined;
     makeObservable(this);
   }
 

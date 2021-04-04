@@ -3,13 +3,12 @@ import { RootStore } from "./RootStore";
 
 export class LoadingStore {
   private rootStore: RootStore;
+  @observable loading = false;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeObservable(this);
   }
-
-  @observable loading = false;
 
   @action stopLoading() {
     this.loading = false;
