@@ -1,4 +1,8 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
+  extends: [
+    "@react-native-community",
+    "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    "plugin:prettier/recommended",
+  ],
 };
