@@ -29,8 +29,7 @@ export class ProfileStore {
     } catch (e) {
       console.warn(e.error);
     } finally {
-      // Syntetic timeout to imitate fetch delay
-      setTimeout(() => this.rootStore.loadingStore.stopLoading(), 1000);
+      this.rootStore.loadingStore.stopLoading();
     }
   }
 
