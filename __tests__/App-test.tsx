@@ -8,31 +8,36 @@ jest.mock("react-native-keychain", () => {
   };
   return {
     setGenericPassword: jest.fn(
-      (username, password) => new Promise((resolve, reject) => resolve(true)), // eslint-disable-line no-unused-vars
+      (username, password) => new Promise((resolve, reject) => resolve(true)),
     ),
     getGenericPassword: jest.fn(
       () => new Promise((resolve, reject) => resolve(credentials)),
-    ), // eslint-disable-line no-unused-vars
+    ),
     resetGenericPassword: jest.fn(
       () => new Promise((resolve, reject) => resolve(true)),
-    ), // eslint-disable-line no-unused-vars
+    ),
   };
 });
 
 describe("LoadingStore", () => {
-  it("When startLoading called loading should be true", async () => {
-    const rootStore = new RootStore();
-    expect(rootStore.loadingStore.loading).toBe(false);
-    await rootStore.loadingStore.startLoading();
-    expect(rootStore.loadingStore.loading).toBe(true);
+  describe("When startLoading called", () => {
+    it("should set loading to true", async () => {
+      const rootStore = new RootStore();
+      expect(rootStore.loadingStore.loading).toBe(false);
+      await rootStore.loadingStore.startLoading();
+      expect(rootStore.loadingStore.loading).toBe(true);
+    });
   });
-  it("When stopLoading called loading should be false", async () => {
-    const rootStore = new RootStore();
-    expect(rootStore.loadingStore.loading).toBe(false);
-    await rootStore.loadingStore.startLoading();
-    expect(rootStore.loadingStore.loading).toBe(true);
-    await rootStore.loadingStore.stopLoading();
-    expect(rootStore.loadingStore.loading).toBe(false);
+
+  describe("When stopLoading called", () => {
+    it("should set loading to false", async () => {
+      const rootStore = new RootStore();
+      expect(rootStore.loadingStore.loading).toBe(false);
+      await rootStore.loadingStore.startLoading();
+      expect(rootStore.loadingStore.loading).toBe(true);
+      await rootStore.loadingStore.stopLoading();
+      expect(rootStore.loadingStore.loading).toBe(false);
+    });
   });
 });
 
