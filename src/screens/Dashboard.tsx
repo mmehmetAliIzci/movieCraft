@@ -3,6 +3,7 @@ import {
   Dimensions,
   FlatList,
   Image,
+  SafeAreaView,
   StyleSheet,
   Text,
   View,
@@ -26,7 +27,7 @@ export const Dashboard = observer(() => {
   }, [page]);
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <FlatList<Movie>
         numColumns={2}
         data={rootStore.movieStore.movies}
@@ -64,7 +65,7 @@ export const Dashboard = observer(() => {
       <Pressable onPress={() => rootStore.profileStore.logout()}>
         <Text style={{ color: colors.white }}>Logout</Text>
       </Pressable>
-    </>
+    </SafeAreaView>
   );
 });
 
