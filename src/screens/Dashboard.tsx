@@ -3,13 +3,16 @@ import {
   Button,
   Dimensions,
   FlatList,
-  ImageBackground,
+  Image,
+  StyleSheet,
   Text,
   View,
 } from "react-native";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../stores/RootStore";
 import { Movie } from "../stores/MovieStore";
+import { font } from "../theme/styleVariables";
+import { Card } from "../components/Card";
 
 export const Dashboard = observer(() => {
   const rootStore = useContext(RootStoreContext);
@@ -34,20 +37,22 @@ export const Dashboard = observer(() => {
         }}
         renderItem={({ item }) => {
           return (
-            <View
-              style={{
-                height: Dimensions.get("window").height / 3,
-                flexDirection: "row",
-                flex: 1,
-              }}>
-              <ImageBackground
-                style={{ flex: 1 }}
-                source={{ uri: item.Poster }}
-                resizeMode={"cover"}>
-                <Text>{item.Title}</Text>
-                <Text>{item.Type}</Text>
-              </ImageBackground>
-            </View>
+            <Card>
+              <View style={styles.itemWrapper}>
+                <Image
+                  style={styles.moviePoster}
+                  source={{ uri: item.Poster }}
+                  resizeMode={"cover"}
+                />
+                <View style={styles.movieInfoContainer}>
+                  <Text style={font.subTitle}>{item.Title}</Text>
+                  <View style={styles.movieSubInfoContainer}>
+                    <Text style={font.paragraph}>{item.Year}</Text>
+                    <Text style={font.paragraph}>{item.Type}</Text>
+                  </View>
+                </View>
+              </View>
+            </Card>
           );
         }}
       />
@@ -57,4 +62,30 @@ export const Dashboard = observer(() => {
       />
     </>
   );
+});
+
+const styles = StyleSheet.create({
+  itemWrapper: {
+    flex: 1,
+    backgroundColor: "transparent",
+    overflow: "hidden",
+    borderRadius: 10,
+  },
+  moviePoster: {
+    height: Dimensions.get("window").height / 3,
+    width: "100%",
+  },
+  movieInfoContainer: {
+    marginVertical: 5,
+    marginHorizontal: 10,
+    flex: 1,
+    justifyContent: "space-around",
+  },
+  movieSubInfoContainer: {
+    flex: 1,
+    marginVertical: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 });
