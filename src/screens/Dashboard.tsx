@@ -45,7 +45,12 @@ export const Dashboard = observer(() => {
                   resizeMode={"cover"}
                 />
                 <View style={styles.movieInfoContainer}>
-                  <Text style={font.subTitle}>{item.Title}</Text>
+                  <Text
+                    numberOfLines={2}
+                    ellipsizeMode="tail"
+                    style={font.subTitle}>
+                    {item.Title}
+                  </Text>
                   <View style={styles.movieSubInfoContainer}>
                     <Text style={font.paragraph}>{item.Year}</Text>
                     <Text style={font.paragraph}>{item.Type}</Text>
@@ -85,6 +90,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
 });
