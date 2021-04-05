@@ -22,8 +22,8 @@ Pull movies and show it in a nice layout.
 
 ### What did i learned
 
-- Mobx now requires `makeObservable(this);`
-- `Pressable` style can get `pressed` as a prop but typings are a tough one to crack.
-- Mocking fetch is cool
-- In order to use ts in jest of course you need to use `ts-jest` (insert facepalm meme)
-- Since react native's uses "density independent pixel", we need to normalize the font sizes  
+- Mobx now requires `makeObservable(this);` to send updates to observing components.
+- `Pressable` style can get `pressed` as a prop which can be utilized for interactions, even texts but typings are a tough one to crack. Thus ts-ignore :(
+- Mocking fetch is cool ✔️
+- In order to use ts in jest of course you need to use `ts-jest` 🤦‍♂️
+- Since react native uses "density independent pixel", we need to normalize the font sizes.
