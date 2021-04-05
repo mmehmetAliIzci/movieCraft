@@ -7,13 +7,13 @@ import {
 } from "react-native";
 
 export const colors = {
-  primaryDark: Appearance.getColorScheme() === "dark" ? "#000030" : "#81b9bf",
-  primary: Appearance.getColorScheme() === "dark" ? "#101a59" : "#b2ebf2",
-  primaryLight: Appearance.getColorScheme() === "dark" ? "#434187" : "#e5ffff",
-  secondaryDark: Appearance.getColorScheme() === "dark" ? "#26002f" : "#9e97b2",
-  secondary: Appearance.getColorScheme() === "dark" ? "#4e1059" : "#cfc8e4",
+  primaryDark: Appearance.getColorScheme() === "dark" ? "#81b9bf" : "#000030",
+  primary: Appearance.getColorScheme() === "dark" ? "#b2ebf2" : "#101a59",
+  primaryLight: Appearance.getColorScheme() === "dark" ? "#e5ffff" : "#434187",
+  secondaryDark: Appearance.getColorScheme() === "dark" ? "#9e97b2" : "#26002f",
+  secondary: Appearance.getColorScheme() === "dark" ? "#cfc8e4" : "#4e1059",
   secondaryLight:
-    Appearance.getColorScheme() === "dark" ? "#7c3e86" : "#fffbff",
+    Appearance.getColorScheme() === "dark" ? "#fffbff" : "#7c3e86",
   textColor: Appearance.getColorScheme() === "dark" ? "#FFFFFF" : "#000000",
   white: Appearance.getColorScheme() === "dark" ? "#1F1F1F" : "#FFFFFF",
   gray: Appearance.getColorScheme() === "dark" ? "#dddddd" : "#9b9b9b",
@@ -21,7 +21,7 @@ export const colors = {
     Appearance.getColorScheme() === "dark" ? "#dddddd" : "#9b9b9b",
 };
 
-const fontFamily = { fontFamily: "Cochin" };
+const fontFamily = { fontFamily: Platform.OS === "ios" ? "Avenir" : "Roboto" };
 
 // SO solution seems good enough
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
@@ -41,12 +41,12 @@ export function normalize(size: number): number {
 export const font = StyleSheet.create({
   title: {
     ...fontFamily,
-    fontSize: normalize(24),
+    fontSize: normalize(14),
     color: colors.textColor,
   },
   subTitle: {
     ...fontFamily,
-    fontSize: normalize(18),
+    fontSize: normalize(13),
     color: colors.textColor,
   },
   paragraph: {
@@ -55,3 +55,5 @@ export const font = StyleSheet.create({
     color: colors.textColorLight,
   },
 });
+
+export const borderRadius = 5;
