@@ -3,6 +3,7 @@ import * as React from "react";
 import { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../stores/RootStore";
+import { colors } from "../theme/styleVariables";
 
 const Loading = observer(() => {
   const rootStore = useContext(RootStoreContext);
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   modalWrapper: {
     alignSelf: "center",
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontWeight: "bold",
+    color: colors.textColor,
     textAlign: "center",
   },
 });

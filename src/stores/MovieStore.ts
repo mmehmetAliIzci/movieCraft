@@ -1,4 +1,4 @@
-import {action, makeObservable, observable, runInAction, toJS} from "mobx";
+import { action, makeObservable, observable, runInAction, toJS } from "mobx";
 import { RootStore } from "./RootStore";
 import { fetchFilms } from "../services/MovieService";
 
