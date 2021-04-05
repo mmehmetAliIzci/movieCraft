@@ -4,7 +4,7 @@ Pull movies and show it in a nice layout.
 
 ### How to run
 
-`yarn install`
+`yarn install` or `npm install`
 
 `cd ios && pod install`
 
