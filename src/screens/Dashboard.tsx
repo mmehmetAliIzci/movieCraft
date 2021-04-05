@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Button,
   Dimensions,
   FlatList,
   Image,
@@ -11,8 +10,9 @@ import {
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../stores/RootStore";
 import { Movie } from "../stores/MovieStore";
-import { font } from "../theme/styleVariables";
+import { colors, font } from "../theme/styleVariables";
 import { Card } from "../components/Card";
+import { Pressable } from "../components/Pressable";
 
 export const Dashboard = observer(() => {
   const rootStore = useContext(RootStoreContext);
@@ -56,10 +56,9 @@ export const Dashboard = observer(() => {
           );
         }}
       />
-      <Button
-        title={"Logout"}
-        onPress={() => rootStore.profileStore.logout()}
-      />
+      <Pressable onPress={() => rootStore.profileStore.logout()}>
+        <Text style={{ color: colors.white }}>Logout</Text>
+      </Pressable>
     </>
   );
 });
