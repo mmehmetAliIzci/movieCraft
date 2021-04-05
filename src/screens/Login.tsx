@@ -26,6 +26,7 @@ export const Login = observer(() => {
         source={require("../assets/loginBackground.jpg")}
         style={style.imageBackground}>
         <TextInput
+          placeholderTextColor={"gray"}
           style={style.input}
           autoCapitalize={"none"}
           placeholder={"Username"}
@@ -34,6 +35,7 @@ export const Login = observer(() => {
           }}
         />
         <TextInput
+          placeholderTextColor={"gray"}
           style={style.input}
           autoCapitalize={"none"}
           secureTextEntry={true}
